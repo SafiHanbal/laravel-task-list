@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('tasks.index');
 });
+
+
+Route::resource('/tasks', TaskController::class);
+Route::get('/tasks/{task}/update-completed', [TaskController::class, 'updateCompletedStatus'])->name('tasks.update-completed');
